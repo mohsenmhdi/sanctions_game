@@ -1,83 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanctions Simulation</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-        }
-        button {
-            padding: 20px;
-            font-size: 20px;
-            margin: 10px;
-        }
-        #slideshow {
-            display: none;
-            text-align: center;
-        }
-        img {
-            width: 300px;
-            height: auto;
-        }
-    </style>
+<html lang=\en\<head>
+<meta charset=\UTF-8\ <meta name=\viewport\ content=\width=device-width, initial-scale=1.0\ <title>Sanction Simulator</title>
+<style>
+body {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+height: 100vh;
+margin: 0;
+font-family: Arial, sans-serif;
+background-color: #f2f2f2;
+}
+#counting {
+font-size: 4em;
+margin: 20px;
+display: none;
+}
+button {
+font-size: 2em;
+padding: 10px 20px;
+margin: 10px;
+cursor: pointer;
+}
+#slideshow {
+display: none;
+flex-direction: column;
+align-items: center;
+margin-top: 20px;
+}
+#slideshow img {
+max-width: 100%;
+height: auto;
+margin-bottom: 10px;
+}
+#links {
+list-style: none;
+padding: 0;
+}
+#links li {
+margin: 5px 0;
+}
+</style>
 </head>
 <body>
 
-    <button id="sanctionButton">Impose Sanctions!</button>
-    <div id="counter"></div>
-    <div id="message" style="display:none;">
-        <p>Sanctions Failed!</p>
-        <button id="whyButton">Why?</button>
-    </div>
-    <div id="slideshow">
-        <img id="slideImage" src="" alt="Slideshow Image">
-        <div>
-            <a id="link" href="#" target="_blank">Learn More</a>
-        </div>
-    </div>
+<button id=\sanctionButton\Impose Sanctions!</button>
+<div id=\counting\div>
+<div id=\message\div>
 
-    <script>
-        let count = 0;
-        let interval;
+<div id=\slideshow\ <img src=\image1.jpg\ alt=\Image 1\ <img src=\image2.jpg\ alt=\Image 2\ <img src=\image3.jpg\ alt=\Image 3\ <ul id=\links\ <li><a href=\https://example.com\Link A</a></li>
+<li><a href=\https://example.com\Link B</a></li>
+</ul>
+</div>
 
-        document.getElementById('sanctionButton').onclick = function() {
-            count = 0;
-            document.getElementById('counter').innerText = count;
-            interval = setInterval(() => {
-                count++;
-                document.getElementById('counter').innerText = count;
-                if (count >= Math.floor(Math.random() * (20 - 10)) + 10) {
-                    clearInterval(interval);
-                    document.getElementById('counter').style.display = 'none';
-                    document.getElementById('message').style.display = 'block';
-                }
-            }, 1000);
-        };
+<script>
+const sanctionButton = document.getElementById('sanctionButton');
+const countingDisplay = document.getElementById('counting');
+const messageDisplay = document.getElementById('message');
+const slideshow = document.getElementById('slideshow');
 
-        document.getElementById('whyButton').onclick = function() {
-            document.getElementById('message').style.display = 'none';
-            document.getElementById('slideshow').style.display = 'block';
-            const images = ['image1.jpg', 'image2.jpg', 'image3.jpg'];
-            const links = ['https://link1.com', 'https://link2.com', 'https://link3.com'];
-            let index = 0;
+sanctionButton.onclick = () => {
+let count = 0;
+countingDisplay.style.display = 'block';
+countingDisplay.textContent = count;
 
-            function showSlide() {
-                document.getElementById('slideImage').src = images[index];
-                document.getElementById('link').href = links[index];
-                index = (index + 1) % images.length;
-            }
+const interval = setInterval(() => {
+count++;
+countingDisplay.textContent = count;
+if (count >= Math.floor(Math.random() * (20 - 10)) + 10) {
+clearInterval(interval);
+countingDisplay.style.display = 'none';
+messageDisplay.textContent = \Sanctions Failed!\ const whyButton = document.createElement('button');
+whyButton.innerText = \Why?\ messageDisplay.appendChild(whyButton);
 
-            showSlide();
-            setInterval(showSlide, 3000);
-        };
-    </script>
+whyButton.onclick = () => {
+slideshow.style.display = 'flex';
+}
+}
+}, 1000);
+};
+</script>
 
 </body>
 </html>
+```
+
+
+### Note:
+- Replace `image1.jpg`, `image2.jpg`, and `image3.jpg` with actual image URLs.
+- Adjust links in the unordered list as needed.
