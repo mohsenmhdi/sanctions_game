@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanctions Example</title>
+    <style>
+        #countDisplay {
+            font-size: 2em;
+            margin: 20px;
+        }
+        #slideshow {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <button id="sanctionButton">Impose Sanctions!</button>
+    <div id="countDisplay"></div>
+    <div id="failureMessage" style="display: none;">
+        <p>Sanctions Failed!</p>
+        <button id="whyButton">Why?</button>
+    </div>
+    <div id="slideshow">
+        <img id="slideImage" src="" alt="Slideshow Image" />
+        <div id="links"></div>
+    </div>
+
+    <script>
+        let count = 0;
+        let interval;
+
+        document.getElementById('sanctionButton').onclick = function() {
+            count = 0;
+            document.getElementById('countDisplay').innerText = count;
+            interval = setInterval(() => {
+                count++;
+                document.getElementById('countDisplay').innerText = count;
+                if (count >= Math.floor(Math.random() * (20 - 10)) + 10) {
+                    clearInterval(interval);
+                    document.getElementById('countDisplay').style.display = 'none';
+                    document.getElementById('failureMessage').style.display = 'block';
+                }
+            }, 1000);
+        };
+
+        document.getElementById('whyButton').onclick = function() {
+            document.getElementById('failureMessage').style.display = 'none';
+            document.getElementById('slideshow').style.display = 'block';
+            const images = ['image1.jpg', 'image2.jpg', 'image3.jpg'];
+            const links = ['<a href="link1.html">Link 1</a>', '<a href="link2.html">Link 2</a>', '<a href="link3.html">Link 3</a>'];
+            let currentIndex = 0;
+
+            function showSlide() {
+                document.getElementById('slideImage').src = images[currentIndex];
+                document.getElementById('links').innerHTML = links[currentIndex];
+                currentIndex = (currentIndex + 1) % images.length;
+            }
+
+            showSlide();
+            setInterval(showSlide, 3000);
+        };
+    </script>
+</body>
+</html>
