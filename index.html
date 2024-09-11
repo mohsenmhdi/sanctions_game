@@ -1,87 +1,115 @@
 <!DOCTYPE html>
-<html lang=\en\<head>
-<meta charset=\UTF-8\ <meta name=\viewport\ content=\width=device-width, initial-scale=1.0\ <title>Sanction Simulator</title>
-<style>
-body {
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-height: 100vh;
-margin: 0;
-font-family: Arial, sans-serif;
-background-color: #f2f2f2;
-}
-#counting {
-font-size: 4em;
-margin: 20px;
-display: none;
-}
-button {
-font-size: 2em;
-padding: 10px 20px;
-margin: 10px;
-cursor: pointer;
-}
-#slideshow {
-display: none;
-flex-direction: column;
-align-items: center;
-margin-top: 20px;
-}
-#slideshow img {
-max-width: 100%;
-height: auto;
-margin-bottom: 10px;
-}
-#links {
-list-style: none;
-padding: 0;
-}
-#links li {
-margin: 5px 0;
-}
-</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanction Simulator</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        #counting {
+            font-size: 4em;
+            margin: 20px;
+            display: none;
+            text-align: center;
+        }
+        button {
+            font-size: 2em;
+            padding: 20px 40px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        #message {
+            font-size: 2em;
+            margin: 20px;
+            text-align: center;
+        }
+        #slideshow {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 800px;
+        }
+        #slideshow img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        #links {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+        #links li {
+            margin: 5px 0;
+        }
+        #links a {
+            font-size: 1.5em;
+            text-decoration: none;
+            color: #000;
+        }
+    </style>
 </head>
 <body>
 
-<button id=\sanctionButton\Impose Sanctions!</button>
-<div id=\counting\div>
-<div id=\message\div>
+    <button id="sanctionButton">Impose Sanctions!</button>
+    <div id="counting">0</div>
+    <div id="message"></div>
 
-<div id=\slideshow\ <img src=\image1.jpg\ alt=\Image 1\ <img src=\image2.jpg\ alt=\Image 2\ <img src=\image3.jpg\ alt=\Image 3\ <ul id=\links\ <li><a href=\https://example.com\Link A</a></li>
-<li><a href=\https://example.com\Link B</a></li>
-</ul>
-</div>
+    <div id="slideshow">
+        <img src="image1.jpg" alt="Image 1">
+        <img src="image2.jpg" alt="Image 2">
+        <img src="image3.jpg" alt="Image 3">
+        <ul id="links">
+            <li><a href="https://example.com">Link A</a></li>
+            <li><a href="https://example.com">Link B</a></li>
+        </ul>
+    </div>
 
-<script>
-const sanctionButton = document.getElementById('sanctionButton');
-const countingDisplay = document.getElementById('counting');
-const messageDisplay = document.getElementById('message');
-const slideshow = document.getElementById('slideshow');
+    <script>
+        const sanctionButton = document.getElementById('sanctionButton');
+        const countingDisplay = document.getElementById('counting');
+        const messageDisplay = document.getElementById('message');
+        const slideshow = document.getElementById('slideshow');
 
-sanctionButton.onclick = () => {
-let count = 0;
-countingDisplay.style.display = 'block';
-countingDisplay.textContent = count;
+        sanctionButton.onclick = () => {
+            let count = 0;
+            countingDisplay.style.display = 'block';
+            countingDisplay.textContent = count;
 
-const interval = setInterval(() => {
-count++;
-countingDisplay.textContent = count;
-if (count >= Math.floor(Math.random() * (20 - 10)) + 10) {
-clearInterval(interval);
-countingDisplay.style.display = 'none';
-messageDisplay.textContent = \Sanctions Failed!\ const whyButton = document.createElement('button');
-whyButton.innerText = \Why?\ messageDisplay.appendChild(whyButton);
+            const interval = setInterval(() => {
+                count++;
+                countingDisplay.textContent = count;
+                if (count >= Math.floor(Math.random() * (20 - 10 + 1)) + 10) {
+                    clearInterval(interval);
+                    countingDisplay.style.display = 'none';
+                    messageDisplay.textContent = 'Sanctions Failed!';
 
-whyButton.onclick = () => {
-slideshow.style.display = 'flex';
-}
-}
-}, 1000);
-};
-</script>
+                    const whyButton = document.createElement('button');
+                    whyButton.innerText = 'Why?';
+                    whyButton.style.fontSize = '2em';
+                    whyButton.style.padding = '10px 20px';
+                    whyButton.style.marginTop = '20px';
+                    messageDisplay.appendChild(document.createElement('br'));
+                    messageDisplay.appendChild(whyButton);
+
+                    whyButton.onclick = () => {
+                        slideshow.style.display = 'flex';
+                    };
+                }
+            }, 1000);
+        };
+    </script>
 
 </body>
 </html>
-
