@@ -3,27 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanctions Example</title>
+    <title>Sanctions Simulation</title>
     <style>
-        #countDisplay {
-            font-size: 2em;
-            margin: 20px;
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        button {
+            padding: 20px;
+            font-size: 20px;
+            margin: 10px;
         }
         #slideshow {
             display: none;
+            text-align: center;
+        }
+        img {
+            width: 300px;
+            height: auto;
         }
     </style>
 </head>
 <body>
+
     <button id="sanctionButton">Impose Sanctions!</button>
-    <div id="countDisplay"></div>
-    <div id="failureMessage" style="display: none;">
+    <div id="counter"></div>
+    <div id="message" style="display:none;">
         <p>Sanctions Failed!</p>
         <button id="whyButton">Why?</button>
     </div>
     <div id="slideshow">
-        <img id="slideImage" src="" alt="Slideshow Image" />
-        <div id="links"></div>
+        <img id="slideImage" src="" alt="Slideshow Image">
+        <div>
+            <a id="link" href="#" target="_blank">Learn More</a>
+        </div>
     </div>
 
     <script>
@@ -32,34 +49,35 @@
 
         document.getElementById('sanctionButton').onclick = function() {
             count = 0;
-            document.getElementById('countDisplay').innerText = count;
+            document.getElementById('counter').innerText = count;
             interval = setInterval(() => {
                 count++;
-                document.getElementById('countDisplay').innerText = count;
+                document.getElementById('counter').innerText = count;
                 if (count >= Math.floor(Math.random() * (20 - 10)) + 10) {
                     clearInterval(interval);
-                    document.getElementById('countDisplay').style.display = 'none';
-                    document.getElementById('failureMessage').style.display = 'block';
+                    document.getElementById('counter').style.display = 'none';
+                    document.getElementById('message').style.display = 'block';
                 }
             }, 1000);
         };
 
         document.getElementById('whyButton').onclick = function() {
-            document.getElementById('failureMessage').style.display = 'none';
+            document.getElementById('message').style.display = 'none';
             document.getElementById('slideshow').style.display = 'block';
             const images = ['image1.jpg', 'image2.jpg', 'image3.jpg'];
-            const links = ['<a href="link1.html">Link 1</a>', '<a href="link2.html">Link 2</a>', '<a href="link3.html">Link 3</a>'];
-            let currentIndex = 0;
+            const links = ['https://link1.com', 'https://link2.com', 'https://link3.com'];
+            let index = 0;
 
             function showSlide() {
-                document.getElementById('slideImage').src = images[currentIndex];
-                document.getElementById('links').innerHTML = links[currentIndex];
-                currentIndex = (currentIndex + 1) % images.length;
+                document.getElementById('slideImage').src = images[index];
+                document.getElementById('link').href = links[index];
+                index = (index + 1) % images.length;
             }
 
             showSlide();
             setInterval(showSlide, 3000);
         };
     </script>
+
 </body>
 </html>
