@@ -22,7 +22,8 @@
       align-items: center;
     }
 
-    #sanctionButton {
+    /* Common styles for all buttons */
+    button {
       font-size: 2em;
       padding: 15px 30px;
       margin: 10px;
@@ -96,7 +97,7 @@
     }
 
     @media (max-width: 600px) {
-      #sanctionButton {
+      button {
         font-size: 1.5em;
         padding: 10px 20px;
       }
@@ -205,13 +206,7 @@
 
           const whyButton = document.createElement('button');
           whyButton.innerText = 'Why?';
-          whyButton.style.fontSize = '2em';
-          whyButton.style.padding = '15px 30px';
-          whyButton.style.cursor = 'pointer';
-          whyButton.style.borderRadius = '10px';
-          whyButton.style.border = 'none';
-          whyButton.style.backgroundColor = '#007BFF';
-          whyButton.style.color = 'white';
+          whyButton.classList.add('big-button'); // Apply same button styling
           messageDisplay.appendChild(whyButton);
 
           // When "Why?" button is clicked
