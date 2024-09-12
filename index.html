@@ -59,6 +59,20 @@
       display: none;
     }
 
+    #winMessage {
+      display: none;
+      text-align: center;
+    }
+
+    #winMessage p {
+      font-size: 2em;
+      margin: 10px 0;
+    }
+
+    #winMessage small {
+      font-size: 1.2em;
+    }
+
     #slideshow {
       display: none;
       flex-direction: column;
@@ -95,7 +109,7 @@
         font-size: 1.5em;
       }
 
-      #message {
+      #message, #winMessage p, #winMessage small {
         font-size: 1.5em;
       }
     }
@@ -105,7 +119,7 @@
 
   <div id="content">
     <button id="sanctionButton">Impose Sanctions!</button>
-    <p id="instructionText">Once you press this button, no matter what, you will lose the game. What do you think you should do to win it?</p>
+    <p id="instructionText">Here you need a text</p>
   </div>
 
   <div id="countingSection">
@@ -114,6 +128,12 @@
   </div>
 
   <div id="message"></div>
+
+  <div id="winMessage">
+    <p>You Win!</p>
+    <small>That is because you avoided self-destructing unintended consequences</small><br>
+    <button id="suchAsButton">Such as?</button>
+  </div>
 
   <div id="slideshow">
     <img src="image1.jpg" alt="Image 1">
@@ -133,8 +153,36 @@
     const slideshow = document.getElementById('slideshow');
     const instructionText = document.getElementById('instructionText');
     const content = document.getElementById('content');
+    const winMessage = document.getElementById('winMessage');
+    const suchAsButton = document.getElementById('suchAsButton');
+
+    let timer;  // To keep track of the 15-second inactivity
+
+    // Function to handle inactivity
+    const startInactivityTimer = () => {
+      timer = setTimeout(() => {
+        // Hide the sanction button and instruction text, and show the win message
+        content.style.display = 'none';
+        winMessage.style.display = 'block';
+      }, 15000);
+    };
+
+    // Function to reset the inactivity timer
+    const resetInactivityTimer = () => {
+      clearTimeout(timer);
+    };
+
+    startInactivityTimer();
+
+    // Handle the "Such as?" button
+    suchAsButton.onclick = () => {
+      winMessage.style.display = 'none';  // Hide the win message and button
+      slideshow.style.display = 'flex';   // Show the slideshow in the center
+    };
 
     sanctionButton.onclick = () => {
+      resetInactivityTimer();  // Stop the inactivity timer if the button is clicked
+
       // Hide the sanction button and instruction text, show the counting section
       content.style.display = 'none';
       countingDisplay.style.display = 'block';
